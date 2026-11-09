@@ -82,6 +82,8 @@
 
       <article class="result" id="result" hidden></article>
       <p class="disclaimer">デモ版の提案です。営業時間や定休日は各店舗の最新情報をご確認ください。</p>
+      // 下の一行がマップの表示
+      <div id="map"></div>
     </div>
   </section>
 
@@ -149,5 +151,9 @@
 
 </div>
 <script src="script.js"></script>
+// ここがマップ用の編集点
+<script src="js/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyAcQIIwRoV8wZMOAmH6nGPOpEw2fXiodzU&callback=initMap" async defer></script>
+// 阿部匡杜のAPIデモキーなので後で変更推奨
 </body>
 </html>

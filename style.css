@@ -155,3 +155,10 @@ img{display:block;max-width:100%}
 .detail-spot .n{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;font-size:10px;font-weight:900}
 .detail-spot h3{font-size:13px;font-weight:800}
 .detail-spot p{margin-top:4px;font-size:9px;color:rgba(0,0,0,.4)}
+
+/*マップの枠のサイズ*/
+#map{
+    height: 400px;
+    width: 100%;
+}
+
