@@ -183,11 +183,61 @@ function renderMyPage() {
   ].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join("");
   $("#my-posts").innerHTML = state.posts.slice(0, 6).map((p) => `<img src="${esc(p.image)}" alt="">`).join("");
 }
+/* ---------- QRスキャナー(カメラ起動まで) ---------- */
+let scanStream = null;
 
+function stopCamera() {
+  if (scanStream) scanStream.getTracks().forEach((t) => t.stop());
+  scanStream = null;
+  $("#scan-video").srcObject = null;
+}
+function showScanError(text) {
+  $("#scanner").classList.add("error");
+  $("#scan-msg").textContent = text;
+}
+async function openScanner() {
+  const el = $("#scanner");
+  el.hidden = false;
+  el.classList.remove("error");
+  $("#scan-msg").textContent = "カメラを起動しています…";
+
+  if (!window.isSecureContext) {
+    return showScanError("カメラは HTTPS か localhost のページでしか使えません。\nスマホの標準カメラでQRを読むこともできます。");
+  }
+  if (!navigator.mediaDevices?.getUserMedia) {
+    return showScanError("このブラウザではカメラを使えません。\nスマホの標準カメラでQRを読んでください。");
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: "environment" } },
+      audio: false,
+    });
+    if (el.hidden) { stream.getTracks().forEach((t) => t.stop()); return; }
+    scanStream = stream;
+    const video = $("#scan-video");
+    video.srcObject = stream;
+    await video.play();
+    $("#scan-msg").textContent = "QRコードを枠に合わせてください";
+    /* ここに「QRを読み取る処理」を追加する(次のステップ)*/
+  } catch (err) {
+    const msg = {
+      NotAllowedError: "カメラの使用が許可されていません。\nブラウザの設定でカメラを許可してください。",
+      NotFoundError: "カメラが見つかりませんでした。",
+      NotReadableError: "ほかのアプリがカメラを使っています。",
+    }[err.name] || "カメラを起動できませんでした。";
+    showScanError(msg);
+  }
+}
+function closeScanner() {
+  stopCamera();
+  $("#scanner").hidden = true;
+}
 /* =========================================================
    イベント(クリックはまとめて委譲)
    ========================================================= */
 document.addEventListener("click", (e) => {
+  if (e.target.closest("[data-scan]")) return openScanner();    
+  if (e.target.closest("#scan-close")) return closeScanner();   
   const go    = e.target.closest("[data-go]");
   const open  = e.target.closest("[data-open]");
   const close = e.target.closest("[data-close]");
@@ -214,8 +264,7 @@ $("#photo").addEventListener("change", (e) => {
   reader.readAsDataURL(file);
 });
 
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheets(); });
-
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeSheets(); closeScanner(); } });
 /* ---------- 起動 ---------- */
 renderHome();
 renderDiscover();
