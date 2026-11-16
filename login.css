@@ -71,3 +71,12 @@ button:hover {
     text-align: center;
     font-size: 14px;
 }
+/* ログイン画面のロゴ */
+.login-logo {
+    display: block;
+    width: 220px;
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto 10px;
+    object-fit: contain;
+}
