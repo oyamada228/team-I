@@ -3,6 +3,13 @@
    画面: ホーム / みつける / コース / マイページ + シート2つ
    ========================================================= */
 
+   // ログイン状態を確認
+if (sessionStorage.getItem("isLogin") !== "true") {
+
+    // ログインしていなければログイン画面へ
+    window.location.href = "login.html";
+}
+
 /* ---------- データ ---------- */
 const IMG = {
   bakery:     "https://images.unsplash.com/photo-1610963812725-3945efe1009f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=88&w=900",
@@ -303,4 +310,20 @@ function countUp(el, to, ms = 600) {
     if (t < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
+}
+
+// ログアウトボタンを取得
+const logoutButton = document.getElementById("logoutButton");
+
+// ログアウトボタンが押されたとき
+if (logoutButton) {
+    logoutButton.addEventListener("click", function() {
+
+        // ログイン状態を削除
+        sessionStorage.removeItem("isLogin");
+        
+        // ログイン画面に戻る
+        window.location.href = "login.html";
+
+    });
 }
