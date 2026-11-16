@@ -18,8 +18,8 @@ const state = {
     { id: 3, user: "ふくしまローカル",     avatar: "ふ", place: "郡山市",     image: IMG.sweets,     caption: "まち歩きの途中で見つけた季節の甘いもの。ごちそうさまでした。", time: "昨日" },
   ],
   compose: { image: IMG.bread, text: "" },
-  course:  { time: "90分", mood: "郡山らしさ", move: "徒歩" },
-  stats:   { lamp: 0, courses: 0 },
+course: { time: "90分", mood: "さっぱり", move: "徒歩" }  ,
+stats:   { lamp: 0, courses: 0 },
 };
 
 const TAGS = ["#クリームボックス", "#郡山ブラック", "#駅前ランチ", "#ごちそうさま"];
@@ -36,11 +36,32 @@ const DETAIL_SPOTS = [
   { name: "街なかベーカリー", note: "前のスポットから徒歩8分" },
 ];
 
+
 const QUESTIONS = [
-  { key: "time", title: "どのくらい時間がある？", options: ["60分", "90分", "半日"] },
-  { key: "mood", title: "今日はどんな気分？",     options: ["郡山らしさ", "甘いもの", "ゆっくり"] },
-  { key: "move", title: "移動方法は？",           options: ["徒歩", "車", "公共交通"] },
+  {
+    key: "time",
+    title: "どのくらい時間がある？",
+    options: ["10分", "30分", "60分", "90分", "半日"]
+  },
+  {
+    key: "mood",
+    title: "今日はどんな気分？",
+    options: [
+      "さっぱり",
+      "がっつり",
+      "甘いもの",
+      "珍しいもの",
+      "ほっとするもの",
+      "少しだけ食べたい"
+    ]
+  },
+  {
+    key: "move",
+    title: "移動方法は？",
+    options: ["徒歩", "車", "公共交通"]
+  }
 ];
+
 
 const COURSES = {
   "郡山らしさ": { title: "郡山の定番、いいとこ取りコース",   description: "発祥グルメと昔ながらの味を、無理なく楽しめる順番にしました。", spots: ["クリームボックス", "郡山ブラック", "地元喫茶でひと休み"] },
