@@ -20,6 +20,10 @@ loginForm.addEventListener("submit", function(event) {
         password === correctPassword) {
 
         alert("ログイン成功！");
+        
+        // ログイン状態を保存
+        sessionStorage.setItem("isLogin", "true");
+
 
         // ログイン状態を保存
         sessionStorage.setItem("loggedIn", "true");
