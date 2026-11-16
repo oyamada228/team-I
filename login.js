@@ -13,7 +13,7 @@ loginForm.addEventListener("submit", function(event) {
 
     // 仮のアカウント情報
     const correctAccount = "test";
-    const correctPassword = "1234";
+    const correctPassword = "123";
 
     // 入力内容を確認
     if (account === correctAccount &&
