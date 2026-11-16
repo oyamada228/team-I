@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ともり — 郡山グルメアプリ</title>
+
+    <!-- ログイン確認 -->
+  <script>
+    if (!sessionStorage.getItem("loggedIn")) {
+      window.location.replace("login.html");
+    }
+  </script>
+
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -20,7 +29,11 @@
   <section id="screen-home" class="screen active">
 
     <header class="top between"><h1>ホーム</h1>
-      <button class="gear" data-go="mypage" aria-label="マイページ"><svg viewBox="0 0 24 24"><use href="#icon-gear"/></svg></button>
+      <div class="header-buttons">
+        <!-- ログアウトボタン -->
+        <button id="logoutButton">ログアウト</button>
+        <button class="gear" data-go="mypage" aria-label="マイページ"><svg viewBox="0 0 24 24"><use href="#icon-gear"/></svg></button>
+      </div>
     </header>
 
     <div class="composer">
@@ -171,9 +184,9 @@
   </div>
 </div>
 <script src="script.js"></script>
-// ここがマップ用の編集点
+<!-- ここがマップ用の編集点 -->
 <script src="js/map.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyAcQIIwRoV8wZMOAmH6nGPOpEw2fXiodzU&callback=initMap" async defer></script>
-// 阿部匡杜のAPIデモキーなので後で変更推奨
+<!-- 阿部匡杜のAPIデモキーなので後で変更推奨 -->
 </body>
 </html>

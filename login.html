@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン画面</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <!--　ともりのロゴ　-->
+<img src="./tomori-logo.png" alt="ともり" class="login-logo">
+        <h2>ログイン</h2>
+
+        <form id="loginForm">
+
+            <label for="account">アカウント名</label>
+            <input type="text" id="account"
+                   placeholder="アカウント名を入力">
+
+            <label for="password">パスワード</label>
+            <input type="password" id="password"
+                   placeholder="パスワードを入力">
+
+            <p id="errorMessage"></p>
+
+            <button type="submit">ログイン</button>
+
+        </form>
+
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

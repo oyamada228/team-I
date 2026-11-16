@@ -3,6 +3,13 @@
    画面: ホーム / みつける / コース / マイページ + シート2つ
    ========================================================= */
 
+   // ログイン状態を確認
+if (sessionStorage.getItem("isLogin") !== "true") {
+
+    // ログインしていなければログイン画面へ
+    window.location.href = "login.html";
+}
+
 /* ---------- データ ---------- */
 const IMG = {
   bakery:     "https://images.unsplash.com/photo-1610963812725-3945efe1009f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=88&w=900",
@@ -18,8 +25,8 @@ const state = {
     { id: 3, user: "ふくしまローカル",     avatar: "ふ", place: "郡山市",     image: IMG.sweets,     caption: "まち歩きの途中で見つけた季節の甘いもの。ごちそうさまでした。", time: "昨日" },
   ],
   compose: { image: IMG.bread, text: "" },
-  course:  { time: "90分", mood: "郡山らしさ", move: "徒歩" },
-  stats:   { lamp: 12, courses: 4 },
+course: { time: "90分", mood: "さっぱり", move: "徒歩" }  ,
+stats:   { lamp: 0, courses: 0 },
 };
 
 const TAGS = ["#クリームボックス", "#郡山ブラック", "#駅前ランチ", "#ごちそうさま"];
@@ -36,11 +43,32 @@ const DETAIL_SPOTS = [
   { name: "街なかベーカリー", note: "前のスポットから徒歩8分" },
 ];
 
+
 const QUESTIONS = [
-  { key: "time", title: "どのくらい時間がある？", options: ["60分", "90分", "半日"] },
-  { key: "mood", title: "今日はどんな気分？",     options: ["郡山らしさ", "甘いもの", "ゆっくり"] },
-  { key: "move", title: "移動方法は？",           options: ["徒歩", "車", "公共交通"] },
+  {
+    key: "time",
+    title: "どのくらい時間がある？",
+    options: ["10分", "30分", "60分", "90分", "半日"]
+  },
+  {
+    key: "mood",
+    title: "今日はどんな気分？",
+    options: [
+      "さっぱり",
+      "がっつり",
+      "甘いもの",
+      "珍しいもの",
+      "ほっとするもの",
+      "少しだけ食べたい"
+    ]
+  },
+  {
+    key: "move",
+    title: "移動方法は？",
+    options: ["徒歩", "車", "公共交通"]
+  }
 ];
+
 
 const COURSES = {
   "郡山らしさ": { title: "郡山の定番、いいとこ取りコース",   description: "発祥グルメと昔ながらの味を、無理なく楽しめる順番にしました。", spots: ["クリームボックス", "郡山ブラック", "地元喫茶でひと休み"] },
@@ -182,6 +210,7 @@ function renderMyPage() {
     [state.posts.length, "投稿"],
   ].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join("");
   $("#my-posts").innerHTML = state.posts.slice(0, 6).map((p) => `<img src="${esc(p.image)}" alt="">`).join("");
+  $$("#stats b").forEach((b) => countUp(b, Number(b.textContent)));
 }
 /* ---------- QRスキャナー(カメラ起動まで) ---------- */
 let scanStream = null;
@@ -218,6 +247,7 @@ async function openScanner() {
     video.srcObject = stream;
     await video.play();
     $("#scan-msg").textContent = "QRコードを枠に合わせてください";
+
     /* ここに「QRを読み取る処理」を追加する(次のステップ)*/
   } catch (err) {
     const msg = {
@@ -271,3 +301,29 @@ renderDiscover();
 renderQuestions();
 renderCompose();
 renderMyPage();
+
+function countUp(el, to, ms = 600) {
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min((now - start) / ms, 1);
+    el.textContent = Math.round(to * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+// ログアウトボタンを取得
+const logoutButton = document.getElementById("logoutButton");
+
+// ログアウトボタンが押されたとき
+if (logoutButton) {
+    logoutButton.addEventListener("click", function() {
+
+        // ログイン状態を削除
+        sessionStorage.removeItem("isLogin");
+        
+        // ログイン画面に戻る
+        window.location.href = "login.html";
+
+    });
+}
