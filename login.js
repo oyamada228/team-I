@@ -21,6 +21,9 @@ loginForm.addEventListener("submit", function(event) {
 
         alert("ログイン成功！");
 
+        // ログイン状態を保存
+        sessionStorage.setItem("loggedIn", "true");
+
         // ホーム画面へ移動
         window.location.href = "index.html";
 
