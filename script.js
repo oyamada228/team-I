@@ -19,7 +19,7 @@ const state = {
   ],
   compose: { image: IMG.bread, text: "" },
   course:  { time: "90分", mood: "郡山らしさ", move: "徒歩" },
-  stats:   { lamp: 12, courses: 4 },
+  stats:   { lamp: 0, courses: 0 },
 };
 
 const TAGS = ["#クリームボックス", "#郡山ブラック", "#駅前ランチ", "#ごちそうさま"];
@@ -182,6 +182,7 @@ function renderMyPage() {
     [state.posts.length, "投稿"],
   ].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join("");
   $("#my-posts").innerHTML = state.posts.slice(0, 6).map((p) => `<img src="${esc(p.image)}" alt="">`).join("");
+  $$("#stats b").forEach((b) => countUp(b, Number(b.textContent)));
 }
 /* ---------- QRスキャナー(カメラ起動まで) ---------- */
 let scanStream = null;
@@ -218,6 +219,7 @@ async function openScanner() {
     video.srcObject = stream;
     await video.play();
     $("#scan-msg").textContent = "QRコードを枠に合わせてください";
+
     /* ここに「QRを読み取る処理」を追加する(次のステップ)*/
   } catch (err) {
     const msg = {
@@ -271,3 +273,13 @@ renderDiscover();
 renderQuestions();
 renderCompose();
 renderMyPage();
+
+function countUp(el, to, ms = 600) {
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min((now - start) / ms, 1);
+    el.textContent = Math.round(to * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
