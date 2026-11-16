@@ -31,12 +31,21 @@
   <!-- ① ホーム -->
   <section id="screen-home" class="screen active">
 
-    <header class="top between"><h1>ホーム</h1>
-      <div class="header-buttons">
-        <!-- ログアウトボタン -->
-        <button id="logoutButton">ログアウト</button>
-        <button class="gear" data-go="mypage" aria-label="マイページ"><svg viewBox="0 0 24 24"><use href="#icon-gear"/></svg></button>
-      </div>
+    <header class="top between">
+        <!-- ともりのロゴ -->
+        <img src="./tomori-logo.png" alt="ともり" class="header-logo">
+
+        <div class="header-buttons">
+            <!-- ログアウトボタン -->
+            <button id="logoutButton">ログアウト</button>
+
+            <!-- マイページボタン -->
+            <button class="gear" data-go="mypage" aria-label="マイページ">
+                <svg viewBox="0 0 24 24">
+                    <use href="#icon-gear"/>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <div class="composer">

@@ -206,3 +206,17 @@ img{display:block;max-width:100%}
 #logoutButton:hover {
     color: #ff5b50;
 }
+/* ヘッダーのともりロゴ */
+.header-logo {
+    width: 90px;
+    height: 55px;
+    object-fit: contain;
+    display: block;
+}
+
+/* 右上のボタン */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
