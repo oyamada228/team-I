@@ -1,19 +1,30 @@
-USE GochitamaDB;
-GO
 
--- 各テーブルの登録件数
-SELECT 'area' AS table_name, COUNT(*) AS total FROM area
-UNION ALL
-SELECT 'course', COUNT(*) FROM course
-UNION ALL
-SELECT 'course_stop', COUNT(*) FROM course_stop
-UNION ALL
-SELECT 'food', COUNT(*) FROM food
-UNION ALL
-SELECT 'phrase', COUNT(*) FROM phrase
-UNION ALL
-SELECT 'shop', COUNT(*) FROM shop
-UNION ALL
-SELECT 'shop_food', COUNT(*) FROM shop_food
-UNION ALL
-SELECT 'thanks', COUNT(*) FROM thanks;
+-- 郡山市が未登録の場合だけ追加する
+IF NOT EXISTS (
+    SELECT 1
+    FROM dbo.area
+    WHERE code = '07203'
+)
+BEGIN
+    INSERT INTO dbo.area
+    (
+        code,
+        prefecture,
+        name,
+        lat,
+        lng,
+        updated_at
+    )
+    VALUES
+    (
+        '07203',
+        N'福島県',
+        N'郡山市',
+        37.398000,
+        140.388100,
+        SYSDATETIME()
+    );
+END;
+
+-- 登録結果を確認
+SELECT * FROM dbo.area;
