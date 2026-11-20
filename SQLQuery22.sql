@@ -1,0 +1,2 @@
+ALTER TABLE dbo.shop
+ADD address NVARCHAR(200) NULL;
