@@ -1,0 +1,209 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\controllers\\shopscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\controllers\\shopscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\data\\gochitamacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\data\\gochitamacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\models\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\models\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\models\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\models\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\controllers\\foodscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\controllers\\foodscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\controllers\\areascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\controllers\\areascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\tomoriapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\tomoriapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|c:\\\u30C1\u30FC\u30E0\u958B\u767A\\tomoriapi\\tomoriapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{16087943-E789-4F3B-8123-0F49AB684A6C}|TomoriAPI\\TomoriAPI.csproj|solutionrelative:tomoriapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hatek\\Downloads\\gochitama_add_posts.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hatek\\Downloads\\gochitama_create_db.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ShopsController.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Controllers\\ShopsController.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Controllers\\ShopsController.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Controllers\\ShopsController.cs",
+              "RelativeToolTip": "TomoriAPI\\Controllers\\ShopsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-16T00:50:04.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Shop.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Models\\Shop.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Models\\Shop.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Models\\Shop.cs",
+              "RelativeToolTip": "TomoriAPI\\Models\\Shop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAUwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T01:41:15.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GochitamaContext.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Data\\GochitamaContext.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Data\\GochitamaContext.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Data\\GochitamaContext.cs",
+              "RelativeToolTip": "TomoriAPI\\Data\\GochitamaContext.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAowHkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T01:29:50.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Area.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Models\\Area.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Models\\Area.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Models\\Area.cs",
+              "RelativeToolTip": "TomoriAPI\\Models\\Area.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-16T01:04:22.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AreasController.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Controllers\\AreasController.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Controllers\\AreasController.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Controllers\\AreasController.cs",
+              "RelativeToolTip": "TomoriAPI\\Controllers\\AreasController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAswBoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-16T01:25:29.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FoodsController.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Controllers\\FoodsController.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Controllers\\FoodsController.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Controllers\\FoodsController.cs",
+              "RelativeToolTip": "TomoriAPI\\Controllers\\FoodsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-16T01:36:32.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TomoriAPI\\Program.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\Program.cs",
+              "RelativeToolTip": "TomoriAPI\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T01:35:30.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TomoriAPI.csproj",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\TomoriAPI.csproj",
+              "RelativeDocumentMoniker": "TomoriAPI\\TomoriAPI.csproj",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\TomoriAPI.csproj",
+              "RelativeToolTip": "TomoriAPI\\TomoriAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-11-13T01:06:56.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "TomoriAPI\\appsettings.json",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\appsettings.json",
+              "RelativeToolTip": "TomoriAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-11-13T00:47:33.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "TomoriAPI\\appsettings.Development.json",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u958B\u767A\\TomoriAPI\\TomoriAPI\\appsettings.Development.json",
+              "RelativeToolTip": "TomoriAPI\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-11-13T00:47:51.35Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "gochitama_add_posts.sql",
+              "DocumentMoniker": "C:\\Users\\hatek\\Downloads\\gochitama_add_posts.sql",
+              "RelativeDocumentMoniker": "..\\..\\Users\\hatek\\Downloads\\gochitama_add_posts.sql",
+              "ToolTip": "C:\\Users\\hatek\\Downloads\\gochitama_add_posts.sql",
+              "RelativeToolTip": "..\\..\\Users\\hatek\\Downloads\\gochitama_add_posts.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-11-12T06:35:42.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "gochitama_create_db.sql",
+              "DocumentMoniker": "C:\\Users\\hatek\\Downloads\\gochitama_create_db.sql",
+              "RelativeDocumentMoniker": "..\\..\\Users\\hatek\\Downloads\\gochitama_create_db.sql",
+              "ToolTip": "C:\\Users\\hatek\\Downloads\\gochitama_create_db.sql",
+              "RelativeToolTip": "..\\..\\Users\\hatek\\Downloads\\gochitama_create_db.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-11-09T07:16:10.291Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
