@@ -212,56 +212,73 @@ function renderMyPage() {
   $("#my-posts").innerHTML = state.posts.slice(0, 6).map((p) => `<img src="${esc(p.image)}" alt="">`).join("");
   $$("#stats b").forEach((b) => countUp(b, Number(b.textContent)));
 }
-/* ---------- QRスキャナー(カメラ起動まで) ---------- */
-let scanStream = null;
 
-function stopCamera() {
-  if (scanStream) scanStream.getTracks().forEach((t) => t.stop());
-  scanStream = null;
-  $("#scan-video").srcObject = null;
-}
-function showScanError(text) {
-  $("#scanner").classList.add("error");
-  $("#scan-msg").textContent = text;
-}
+/* ---------- QRスキャナー ---------- */
+
+let qrScanner = null;
+
 async function openScanner() {
-  const el = $("#scanner");
-  el.hidden = false;
-  el.classList.remove("error");
-  $("#scan-msg").textContent = "カメラを起動しています…";
+    const el = $("#scanner");
+    el.hidden = false;
+    el.classList.remove("error");
 
-  if (!window.isSecureContext) {
-    return showScanError("カメラは HTTPS か localhost のページでしか使えません。\nスマホの標準カメラでQRを読むこともできます。");
-  }
-  if (!navigator.mediaDevices?.getUserMedia) {
-    return showScanError("このブラウザではカメラを使えません。\nスマホの標準カメラでQRを読んでください。");
-  }
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { ideal: "environment" } },
-      audio: false,
-    });
-    if (el.hidden) { stream.getTracks().forEach((t) => t.stop()); return; }
-    scanStream = stream;
-    const video = $("#scan-video");
-    video.srcObject = stream;
-    await video.play();
-    $("#scan-msg").textContent = "QRコードを枠に合わせてください";
+    $("#scan-msg").textContent = "カメラを起動しています…";
+    $("#scan-result").textContent = "";
 
-    /* ここに「QRを読み取る処理」を追加する(次のステップ)*/
-  } catch (err) {
-    const msg = {
-      NotAllowedError: "カメラの使用が許可されていません。\nブラウザの設定でカメラを許可してください。",
-      NotFoundError: "カメラが見つかりませんでした。",
-      NotReadableError: "ほかのアプリがカメラを使っています。",
-    }[err.name] || "カメラを起動できませんでした。";
-    showScanError(msg);
-  }
+    if (typeof Html5Qrcode === "undefined") {
+        showScanError("QRコード読み取りライブラリを読み込めませんでした。");
+        return;
+    }
+
+    try {
+        qrScanner = new Html5Qrcode("reader");
+
+        await qrScanner.start(
+            { facingMode: "environment" },
+            {
+                fps: 10,
+                qrbox: { width: 250, height: 250 }
+            },
+            (decodedText) => {
+                $("#scan-result").textContent = "読み取り結果：" + decodedText;
+                $("#scan-msg").textContent = "QRコードを読み取りました！";
+                closeScanner();
+            },
+            () => {
+                // 読み取り途中のエラーは無視します
+            }
+        );
+
+        $("#scan-msg").textContent = "QRコードを枠に合わせてください";
+
+    } catch (err) {
+        showScanError("カメラを起動できませんでした。カメラの使用を許可してください。");
+        console.error(err);
+    }
 }
-function closeScanner() {
-  stopCamera();
-  $("#scanner").hidden = true;
+
+async function closeScanner() {
+    if (qrScanner) {
+        try {
+            if (qrScanner.isScanning) {
+                await qrScanner.stop();
+            }
+            qrScanner.clear();
+        } catch (err) {
+            console.error(err);
+        }
+
+        qrScanner = null;
+    }
+
+    $("#scanner").hidden = true;
 }
+
+function showScanError(text) {
+    $("#scanner").classList.add("error");
+    $("#scan-msg").textContent = text;
+}
+
 /* =========================================================
    イベント(クリックはまとめて委譲)
    ========================================================= */
@@ -326,4 +343,11 @@ if (logoutButton) {
         window.location.href = "login.html";
 
     });
+}
+
+// QRコード読み取り機能に対応しているか確認
+if ("BarcodeDetector" in window) {
+    console.log("QRコード読み取りに対応しています");
+} else {
+    console.log("QRコード読み取りに対応していません");
 }
