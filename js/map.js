@@ -1,5 +1,6 @@
 
 async function initMap() {
+  if (!document.getElementById("map")) return;
     // 郡山駅の座標
     const centerLatLng = {
         lat: 37.3980,
@@ -57,3 +58,5 @@ async function initMap() {
         console.error("API接続エラー:", error);
     }
 }
+
+

@@ -141,35 +141,169 @@ function renderQuestions() {
       </div>
     </section>`).join("");
 }
-function generateCourse() {
+
+function getCurrentLocation() {
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) {
+      resolve({ lat: 37.3981, lng: 140.3886 }); // 非対応ブラウザ用
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      },
+      (err) => {
+        console.warn("位置情報の取得が拒否されたため郡山駅を使用します:", err);
+        resolve({ lat: 37.3981, lng: 140.3886 }); // 拒否・エラー時のフォールバック
+      },
+      { timeout: 5000 }
+    );
+  });
+}
+
+async function generateCourse() {
   const btn = $("#generate");
   btn.disabled = true;
-  btn.textContent = "AIがコースを考えています…";
+  btn.textContent = "現在地とコースを検索中…";
   $("#result").hidden = true;
   $("#loading").hidden = false;
 
-  setTimeout(() => {
+  try {
     const { time, mood, move } = state.course;
-    const c = COURSES[mood];
-    const minutes = move === "徒歩" ? 8 : 5;
+
+    // ① まずブラウザから現在地を取得する
+    const currentPos = await getCurrentLocation();
+
+    // ② 3つの条件＋現在地をサーバー（Gemini API）へ送信
+    const response = await fetch("/api/course", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        time,
+        mood,
+        move,
+        lat: currentPos.lat,
+        lng: currentPos.lng,
+      }),
+    });
+
+    if (!response.ok) throw new Error("サーバーエラー");
+    const c = await response.json();
+
+    // ③ HTMLの組み立て
     $("#result").innerHTML = `
       <div class="result-top">
         <div class="row"><span class="tagb">AI PICK</span><span class="meta">${esc(time)} · ${esc(move)}</span></div>
         <h2>${esc(c.title)}</h2><p>${esc(c.description)}</p>
       </div>
       <div class="result-body">
-        ${c.spots.map((name, i) => `
+        <div class="spot"><span class="num">START</span>
+          <div><h3>現在地</h3><p>ここからスタート</p></div></div>
+        ${c.spots.map((spot, i) => `
           <div class="spot"><span class="num">0${i + 1}</span>
-            <div><h3>${esc(name)}</h3><p>${i === 0 ? "郡山駅からスタート" : `${esc(move)}で約${minutes}分`}</p></div></div>`).join("")}
-        <button class="btn-dark">このコースではじめる <span>→</span></button>
+            <div><h3>${esc(spot.name)}</h3><p>${esc(spot.access)}</p></div></div>`).join("")}
+        <button class="btn-dark" id="openGoogleMaps">Googleマップアプリでナビ開始 <span>→</span></button>
+        <div id="map" style="height: 300px; width: 100%; margin: 16px 0; border-radius: 8px;"></div>
         <button class="retry" id="retry">別のコースを提案してもらう</button>
       </div>`;
+
     $("#loading").hidden = true;
     $("#result").hidden = false;
+
+    // ④ 地図の生成とルート線の描画
+    const mapElement = document.getElementById("map");
+    if (mapElement && window.google && c.spots.length > 0) {
+      const map = new google.maps.Map(mapElement, {
+        center: currentPos,
+        zoom: 14,
+      });
+
+      const lastSpot = c.spots[c.spots.length - 1];
+      const waypoints = c.spots.slice(0, -1).map((spot) => spot.name);
+
+      // 自前サーバーの /api/route を呼び出す
+      const routeRes = await fetch("/api/route", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          origin: currentPos,
+          destination: lastSpot.name,
+          waypoints: waypoints,
+          move: move,
+        }),
+      });
+
+      const routeData = await routeRes.json();
+
+      if (routeRes.ok && routeData.encodedPolyline) {
+        // 1. ポリライン（ルート線）を地図に描画
+        const decodedPath = google.maps.geometry.encoding.decodePath(
+          routeData.encodedPolyline
+        );
+        new google.maps.Polyline({
+          path: decodedPath,
+          geodesic: true,
+          strokeColor: "#1a73e8",
+          strokeOpacity: 0.9,
+          strokeWeight: 5,
+          map: map,
+        });
+
+        // 2. スタート地点と各スポットにピンを立てる
+        new google.maps.Marker({
+          position: currentPos,
+          map: map,
+          label: "S",
+          title: "現在地",
+        });
+
+        if (routeData.legs) {
+          routeData.legs.forEach((leg, index) => {
+            const pos = {
+              lat: leg.endLocation.latLng.latitude,
+              lng: leg.endLocation.latLng.longitude,
+            };
+            new google.maps.Marker({
+              position: pos,
+              map: map,
+              label: `${index + 1}`,
+              title: c.spots[index]?.name || `スポット${index + 1}`,
+            });
+          });
+        }
+
+        // 3. ルート全体が収まるようにズーム調整
+        if (routeData.viewport) {
+          const bounds = new google.maps.LatLngBounds(
+            {
+              lat: routeData.viewport.low.latitude,
+              lng: routeData.viewport.low.longitude,
+            },
+            {
+              lat: routeData.viewport.high.latitude,
+              lng: routeData.viewport.high.longitude,
+            }
+          );
+          map.fitBounds(bounds);
+        }
+      } else {
+        console.error("ルート描画失敗:", routeData);
+        alert("ルート線の描画に失敗しました。");
+      }
+    }
+
+    // 再生成ボタンの再設定
+    const retryBtn = document.getElementById("retry");
+    if (retryBtn) retryBtn.addEventListener("click", generateCourse);
+
+  } catch (error) {
+    console.error(error);
+    $("#loading").hidden = true;
+    alert("コースの提案中にエラーが発生しました。");
+  } finally {
     btn.disabled = false;
     btn.textContent = "✦ AIにコースを提案してもらう";
-    state.stats.courses += 0; // ← コースを保存したいときはここで更新
-  }, 900);
+  }
 }
 
 /* =========================================================

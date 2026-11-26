@@ -1,0 +1,8 @@
+## セットアップ手順
+1. パッケージのインストール
+   `npm install`
+2. `.env.example` をコピーして `.env` を作成し、各 API キーを設定する
+3. サーバー起動
+   `node server.js`
+4. ブラウザで `http://localhost:3000` にアクセス
+5.Ctrl + cでサーバー停止
