@@ -186,12 +186,14 @@
   </div>
   <!-- QRスキャナー(全画面) -->
   <div class="scanner" id="scanner" hidden>
-    <video id="scan-video" playsinline muted autoplay></video>
+    <div id="reader"></div>
     <div class="scan-frame"></div>
     <p class="scan-msg" id="scan-msg">QRコードを枠に合わせてください</p>
+    <p id="scan-result"></p>
     <button class="scan-close" id="scan-close">✕ 閉じる</button>
   </div>
 </div>
+<script src="https://unpkg.com/html5-qrcode"></script>
 <script src="script.js"></script>
 <!-- ここがマップ用の編集点 -->
 <script src="js/map.js"></script>
