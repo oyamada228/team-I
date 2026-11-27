@@ -161,6 +161,10 @@ img{display:block;max-width:100%}
     height: 400px;
     width: 100%;
 }
+#rtmap{
+  height: 400px;
+  width: 100%;
+}
 
 /* QRボタン(タブバー中央) */
 .tabbar button.qr{min-width:64px;margin-top:-26px;color:#000}

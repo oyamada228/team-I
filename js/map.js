@@ -1,11 +1,8 @@
 
 async function initMap() {
-
-    // =====================================
-    // 1. 郡山駅の初期位置
-    // =====================================
-
-    const defaultLatLng = {
+  if (!document.getElementById("map")) return;
+    // 郡山駅の座標
+    const centerLatLng = {
         lat: 37.3980,
         lng: 140.3881
     };
@@ -14,6 +11,53 @@ async function initMap() {
         document.getElementById("map"),
         {
             zoom: 13,
+            center: defaultLatLng
+        }
+    );
+
+
+    // =====================================
+    // 2. 地域情報を取得
+    // =====================================
+
+    try {
+
+        const areaResponse = await fetch(
+            "https://localhost:7028/api/Areas"
+        );
+
+        if (!areaResponse.ok) {
+            throw new Error("地域情報の取得に失敗しました");
+        }
+
+        const areas = await areaResponse.json();
+
+        const koriyama = areas.find(
+            area => area.name === "郡山市"
+        );
+
+        if (koriyama) {
+            map.setCenter({
+                lat: Number(koriyama.lat),
+                lng: Number(koriyama.lng)
+            });
+        }
+
+        console.log("地域情報を取得しました", areas);
+
+    } catch (error) {
+
+        console.error("地域APIエラー:", error);
+
+    }
+
+
+    // =====================================
+    // 3. 店舗情報を取得
+    // =====================================
+
+    try {
+
             center: defaultLatLng
         }
     );
@@ -78,18 +122,29 @@ async function initMap() {
             izakaya: "居酒屋"
         };
 
+        // 店舗の種類を日本語に変換
+        const kindLabels = {
+            hanbai: "販売",
+            shokuji: "食事",
+            izakaya: "居酒屋"
+        };
+
         // 店舗ごとにマーカーを設置
         shops.forEach(shop => {
 
+
             const marker = new google.maps.Marker({
+
 
                 position: {
                     lat: Number(shop.lat),
                     lng: Number(shop.lng)
                 },
 
+
                 map: map,
                 title: shop.name
+
 
             });
 
@@ -103,6 +158,17 @@ async function initMap() {
                     : "<li>料理情報はありません</li>";
 
 
+
+            // 料理一覧を作成
+            const foodList =
+                Array.isArray(shop.foods) && shop.foods.length > 0
+                    ? shop.foods
+                        .map(food => `<li>${food}</li>`)
+                        .join("")
+                    : "<li>料理情報はありません</li>";
+
+
+            // 店舗詳細を作成
             // 店舗詳細を作成
             const infoWindow = new google.maps.InfoWindow({
 
@@ -155,14 +221,67 @@ async function initMap() {
 
 
             // マーカーをクリックしたとき
+
+                content: `
+                    <div style="
+                        padding: 10px;
+                        min-width: 220px;
+                        max-width: 300px;
+                        font-family: sans-serif;
+                    ">
+
+                        <h3 style="
+                            margin: 0 0 12px;
+                            font-size: 18px;
+                            color: #333;
+                        ">
+                            ${shop.name}
+                        </h3>
+
+                        <p style="margin: 6px 0;">
+                            <strong>住所：</strong><br>
+                            ${shop.address || "住所は未登録です"}
+                        </p>
+
+                        <p style="margin: 6px 0;">
+                            <strong>店舗の種類：</strong>
+                            ${kindLabels[shop.kind] || shop.kind}
+                        </p>
+
+                        <p style="margin: 6px 0;">
+                            <strong>店舗コメント：</strong><br>
+                            ${shop.comment || "コメントはありません"}
+                        </p>
+
+                        <hr>
+
+                        <strong>取り扱い郷土料理</strong>
+
+                        <ul style="
+                            padding-left: 20px;
+                            margin-bottom: 5px;
+                        ">
+                            ${foodList}
+                        </ul>
+
+                    </div>
+                `
+
+            });
+
+
+            // マーカーをクリックしたとき
             marker.addListener("click", () => {
+
 
                 infoWindow.open({
                     anchor: marker,
                     map: map
                 });
 
+
             });
+
 
         });
 
