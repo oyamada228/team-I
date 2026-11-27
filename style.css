@@ -269,3 +269,37 @@ img{display:block;max-width:100%}
 .scanner[hidden] {
     display: none !important;
 }
+
+/* レビュー画面 */
+.review-form {
+    margin-top: 24px;
+}
+
+.review-stars {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0 25px;
+}
+
+.review-stars button {
+    border: none;
+    background: none;
+    font-size: 36px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.review-stars button.selected {
+    color: #ffb800;
+}
+
+#review-comment {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 15px;
+    resize: vertical;
+    box-sizing: border-box;
+}

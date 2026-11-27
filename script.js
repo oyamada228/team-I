@@ -27,6 +27,10 @@ const state = {
   compose: { image: IMG.bread, text: "" },
 course: { time: "90分", mood: "さっぱり", move: "徒歩" }  ,
 stats:   { lamp: 0, courses: 0 },
+review: {
+    rating: 0,
+    comment: ""
+},
 };
 
 const TAGS = ["#クリームボックス", "#郡山ブラック", "#駅前ランチ", "#ごちそうさま"];
@@ -212,7 +216,40 @@ function renderMyPage() {
   $("#my-posts").innerHTML = state.posts.slice(0, 6).map((p) => `<img src="${esc(p.image)}" alt="">`).join("");
   $$("#stats b").forEach((b) => countUp(b, Number(b.textContent)));
 }
+/* ---------- 店舗レビュー ---------- */
 
+function submitReview() {
+    const rating = state.review.rating;
+    const comment = $("#review-comment").value.trim();
+
+    if (rating === 0) {
+        alert("星評価を選択してください。");
+        return;
+    }
+
+    if (comment === "") {
+        alert("感想を入力してください。");
+        return;
+    }
+
+    alert(
+        "レビューを投稿しました！\n" +
+        "評価：" + rating + "点\n" +
+        "感想：" + comment
+    );
+
+    // 入力内容をリセット
+    state.review.rating = 0;
+    state.review.comment = "";
+    $("#review-comment").value = "";
+
+    // 星の表示もリセット
+    $$(".review-stars button").forEach(button => {
+        button.classList.remove("selected");
+    });
+
+    showScreen("home");
+}
 /* ---------- QRスキャナー ---------- */
 
 let qrScanner = null;
@@ -239,11 +276,41 @@ async function openScanner() {
                 fps: 10,
                 qrbox: { width: 250, height: 250 }
             },
+
             (decodedText) => {
-                $("#scan-result").textContent = "読み取り結果：" + decodedText;
-                $("#scan-msg").textContent = "QRコードを読み取りました！";
-                closeScanner();
-            },
+    // QRコードから店舗IDを取得
+    let shopId = "";
+
+    try {
+        const url = new URL(decodedText);
+        shopId = url.searchParams.get("shop_id");
+    } catch (err) {
+        // URLではない場合は読み取った文字列を店舗IDとして扱う
+        shopId = decodedText;
+    }
+
+    // 店舗情報を確認
+    const shops = {
+        "001": "大友パン店",
+        "002": "ベーカリーロミオ",
+        "003": "郡山ブラックのお店"
+    };
+
+    const shopName = shops[shopId];
+
+    if (!shopName) {
+        $("#scan-msg").textContent = "登録されていない店舗です。";
+        return;
+    }
+
+    // 店舗名をレビュー画面に表示
+    $("#review-shop-name").textContent = shopName;
+
+    // スキャナーを閉じてレビュー画面へ移動
+    closeScanner().then(() => {
+        showScreen("review");
+    });
+},
             () => {
                 // 読み取り途中のエラーは無視します
             }
@@ -290,6 +357,29 @@ document.addEventListener("click", (e) => {
   const close = e.target.closest("[data-close]");
   const opt   = e.target.closest(".opt");
   const preset = e.target.closest("#presets button");
+
+  // 星評価
+const star = e.target.closest("[data-rating]");
+
+if (star) {
+    state.review.rating = Number(star.dataset.rating);
+
+    $$(".review-stars button").forEach(button => {
+        const rating = Number(button.dataset.rating);
+
+        button.classList.toggle(
+            "selected",
+            rating <= state.review.rating
+        );
+    });
+
+    return;
+}
+
+// レビュー投稿
+if (e.target.closest("#review-submit")) {
+    return submitReview();
+}
 
   if (go)    return showScreen(go.dataset.go);
   if (open)  return openSheet(open.dataset.open);

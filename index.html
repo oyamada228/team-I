@@ -10,7 +10,7 @@
 
     <!-- ログイン確認 -->
   <script>
-    if (!sessionStorage.getItem("loggedIn")) {
+    if (!sessionStorage.getItem("isLogin")) {
       window.location.replace("login.html");
     }
   </script>
@@ -137,6 +137,42 @@
       <div class="grid" id="my-posts"></div>
     </div>
   </section>
+
+  <!-- ⑤ 店舗レビュー画面 -->
+<section id="screen-review" class="screen">
+  <header class="top between">
+    <button class="chip-btn" data-go="home">← 戻る</button>
+    <h2>店舗レビュー</h2>
+    <div></div>
+  </header>
+
+  <div class="pad">
+    <p class="eyebrow">SHOP REVIEW</p>
+    <h2 id="review-shop-name">店舗名</h2>
+
+    <div class="review-form">
+      <h3>お店の評価</h3>
+
+      <div class="review-stars">
+        <button type="button" data-rating="1">★</button>
+        <button type="button" data-rating="2">★</button>
+        <button type="button" data-rating="3">★</button>
+        <button type="button" data-rating="4">★</button>
+        <button type="button" data-rating="5">★</button>
+      </div>
+
+      <h3>お店の感想</h3>
+      <textarea
+        id="review-comment"
+        placeholder="お店の感想を書いてください..."
+      ></textarea>
+
+      <button class="btn-accent" id="review-submit">
+        レビューを投稿する
+      </button>
+    </div>
+  </div>
+</section>
 
   <!-- 下部タブ -->
       <nav class="tabbar" id="tabbar">
